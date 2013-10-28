@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Bundle-Name: People Man
+Bundle-Activator: com.dotcms.peopleman.viewtools.Activator
+Bundle-SymbolicName: Osgi View Tool
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: OSGi/Minimum-1.0
+DynamicImport-Package: *
+Import-Package:  org.osgi.service.http,
+ org.apache.felix.http.api,
+ javax.inject.Qualifier,
+ org.osgi.util.tracker,
+ javax.servlet.http,
+ javax.servlet.resources,
+ org.apache.velocity.tools,
+ org.apache.velocity.tools.view,
+ org.apache.velocity.tools.view.tools,
+ com.liferay.portal.model,
+ com.dotmarketing.business,
+ com.dotmarketing.exception,
+ com.dotmarketing.util,
+ com.dotmarketing.portlets.structure.model,
+ com.dotmarketing.portlets.contentlet.model,
+ org.springframework.aop,
+ org.springframework.asm,
+ org.springframework.beans,
+ org.springframework.beans.factory,
+ org.springframework.beans.factory.annotation,
+ org.springframework.context.support,
+ org.springframework.core,
+ org.springframework.core.io,
+ org.springframework.ui,
+ org.springframework.stereotype,
+ org.springframework.web.bind.annotation,
+ org.springframework.web.context,
+ org.springframework.web.context.support,
+ org.springframework.web.servlet.handler,
+ org.springframework.web.servlet.mvc,
+ org.springframework.web.servlet,
+ org.springframework.web.servlet.mvc.annotation,
+ org.springframework.osgi.service.importer,
+ org.springframework.osgi.service.importer.support,
+ org.springframework.web.servlet.view,
+ org.aopalliance.aop,
+ org.aopalliance.intercept,
+ com.dotcms.spring.web,
+ com.dotmarketing.filters
+ 
