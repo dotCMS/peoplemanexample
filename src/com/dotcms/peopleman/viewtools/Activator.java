@@ -32,11 +32,11 @@ public class Activator extends GenericBundleActivator {
             try {
                 dispatcherServlet = new DispatcherServlet();
                 dispatcherServlet.setContextConfigLocation( "spring/example-servlet.xml" );
-                httpService.registerServlet( "/peopleman", dispatcherServlet, null, null );
+                httpService.registerServlet( "/spring", dispatcherServlet, null, null );
             } catch ( Exception e ) {
                 e.printStackTrace();
             }
-            CMSFilter.addExclude( "/app/peopleman" );
+            CMSFilter.addExclude( "/app/spring" );
         }
     }
 
@@ -49,7 +49,7 @@ public class Activator extends GenericBundleActivator {
             httpService.unregisterServlet( dispatcherServlet );
         }
 
-        CMSFilter.removeExclude( "/app/peopleman" );
+        CMSFilter.removeExclude( "/app/spring" );
 
         //Unpublish bundle services
         unpublishBundleServices();
