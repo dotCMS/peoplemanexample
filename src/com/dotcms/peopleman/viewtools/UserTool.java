@@ -56,6 +56,7 @@ public class UserTool implements ViewTool {
 					Contentlet uc = ucs.get(0);
 					p.setMale(APILocator.getContentletAPI().getFieldValue(uc, genderField).equals("Male")?true:false);
 					p.setNotes(APILocator.getContentletAPI().getFieldValue(uc, notesField).toString());
+					p.setPersonContent(uc);
 				}
 				people.add(p);
 			} catch (DotDataException e) {

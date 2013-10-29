@@ -43,5 +43,6 @@ Import-Package:  org.osgi.service.http,
  org.aopalliance.aop,
  org.aopalliance.intercept,
  com.dotcms.spring.web,
- com.dotmarketing.filters
+ com.dotmarketing.filters,
+ com.dotmarketing.portlets.languagesmanager.business
  
