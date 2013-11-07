@@ -15,7 +15,7 @@ This plugin is intended to be demonstrated on the dotcms starter site.
 
 
 
-**Running**
+## Running
 1.  From the Dynamic Plugin scree, add "com.dotmarketing.portlets.languagesmanager.business" to your OSGi exports
 2.  From the "Push Publishing" Screen, upload the bundle under ./bundle/peopleman-bundle.tar.gz
 3.  From the Dynamic Plugin scree, make sure the OSGi plugin has started
