@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bundle-Name: People Man
+Bundle-Name: People Manager
 Bundle-Activator: com.dotcms.peopleman.viewtools.Activator
-Bundle-SymbolicName: Osgi View Tool
+Bundle-SymbolicName: People Spring Example
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: OSGi/Minimum-1.0
 DynamicImport-Package: *

@@ -10,7 +10,7 @@
     <!-- enable anntotation-driven controllers -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 
-	<bean id="userController" class="com.dotcms.peopleman.spring.UserController"></bean>
+	<bean id="personController" class="com.dotcms.peopleman.spring.PersonController"></bean>
 
     <bean id="viewResolver" class="com.dotcms.spring.web.DotViewResolver">
         <property name="prefix" value="/peopleman/"/>

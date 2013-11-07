@@ -6,64 +6,90 @@ import com.liferay.portal.model.User;
 public class Person {
 
 	private User user = null;
-	private boolean male = false;
-	private String notes;
 	private Contentlet personContent;
-	
+
+	public String getGender() {
+
+		return (personContent == null) ? null : (String) personContent.getMap().get("gender");
+	}
+
+	public void setGender(String gender) {
+		personContent.getMap().put("gender", gender);
+
+	}
+
+	public String getTags() {
+		return (personContent == null) ? null : (String) personContent.getMap().get("tags");
+	}
+
+	public void setTags(String tags) {
+		personContent.getMap().put("tags", tags);
+	}
+
+	public String getTwitterId() {
+
+		return (personContent == null) ? null : personContent.getMap().get("twitterId").toString();
+	}
+
+	public void setTwitterId(String twitterId) {
+
+		personContent.getMap().put("twitterId", twitterId);
+	}
+
 	/**
 	 * @return the user
 	 */
 	public User getUser() {
 		return user;
 	}
+
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
-	/**
-	 * @return the male
-	 */
-	public boolean isMale() {
-		return male;
-	}
-	/**
-	 * @param male the male to set
-	 */
-	public void setMale(boolean male) {
-		this.male = male;
-	}
+
 	/**
 	 * @return the notes
 	 */
 	public String getNotes() {
-		return notes;
+		return (personContent == null) ? null : (String) personContent.getMap().get("notes");
 	}
-	public String printGender(){
-		if(personContent == null){
-			return "";
-		}
-		if(isMale()){
-			return "Male";
-		}else{
-			return "Female";
-		}
-	}
+
 	/**
-	 * @param notes the notes to set
+	 * @return the notes
+	 */
+	public String get(String key) {
+		return (personContent == null) ? null : (String) personContent.getMap().get(key);
+	}
+
+	/**
+	 * @return the notes
+	 */
+	public void put(String key, Object value) {
+		personContent.getMap().put(key, value);
+	}
+
+	/**
+	 * @param notes
+	 *            the notes to set
 	 */
 	public void setNotes(String notes) {
-		this.notes = notes;
+		personContent.getMap().put("notes", notes);
 	}
+
 	/**
 	 * @return the personContent
 	 */
 	public Contentlet getPersonContent() {
 		return personContent;
 	}
+
 	/**
-	 * @param personContent the personContent to set
+	 * @param personContent
+	 *            the personContent to set
 	 */
 	public void setPersonContent(Contentlet personContent) {
 		this.personContent = personContent;

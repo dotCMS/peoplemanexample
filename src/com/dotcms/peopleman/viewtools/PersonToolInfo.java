@@ -3,11 +3,11 @@ package com.dotcms.peopleman.viewtools;
 import org.apache.velocity.tools.view.context.ViewContext;
 import org.apache.velocity.tools.view.servlet.ServletToolInfo;
 
-public class UserToolInfo extends ServletToolInfo {
+public class PersonToolInfo extends ServletToolInfo {
 
     @Override
     public String getKey () {
-        return "usertool";
+        return "persontool";
     }
 
     @Override
@@ -17,13 +17,13 @@ public class UserToolInfo extends ServletToolInfo {
 
     @Override
     public String getClassname () {
-        return UserTool.class.getName();
+        return PersonTool.class.getName();
     }
 
     @Override
     public Object getInstance ( Object initData ) {
 
-        UserTool viewTool = new UserTool();
+    	PersonTool viewTool = new PersonTool();
         viewTool.init( initData );
 
         setScope( ViewContext.APPLICATION );

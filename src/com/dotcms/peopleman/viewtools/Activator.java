@@ -20,7 +20,7 @@ public class Activator extends GenericBundleActivator {
         initializeServices( bundleContext );
 
         //Registering the ViewTool service
-        registerViewToolService( bundleContext, new UserToolInfo() );
+        registerViewToolService( bundleContext, new PersonToolInfo() );
         
         ServiceReference sRef = bundleContext.getServiceReference( ExtHttpService.class.getName() );
         if ( sRef != null ) {
