@@ -1,51 +1,24 @@
-
 README
 ------
 
-How to add a ViewTool OSGI plugin
+PeopleMan OSGI plugin
 ---------------------------------
 
---
-In order to create this OSGI plugin, you must write the META-INF/MANIFEST
-to be inserted into OSGI jar.
+This plugin shows a user how to build a complete Spring web app and velocity viewtool that
+can be and push/launched via Push Publishing.  The plugin creates a new structure, 
+called "People" that can be used to store extra/custom information regarding 
+any dotcms user.  It will also build a folder under /peopleman with pages and the .vtl 
+files needed to demonstrate the app.
 
-In this MANIFEST you must specify (see template plugin):
+This plugin is intended to be demonstrated on the dotcms starter site.
 
-Bundle-Name: The name of your bundle
 
-Bundle-SymbolicName: A short an unique name for the bundle
 
-Bundle-Activator: Package and name of your Activator class (example: com.dotmarketing.osgi.viewtools.Activator)
 
-DynamicImport-Package: *
-    Dynamically add required imports the plugin may need without add them explicitly
-
-Import-Package: This is a comma separated list of package's name.
-                In this list there must be the packages that you are using inside
-                the bundle plugin and that are exported by the dotCMS runtime.
-
-Beware!!!
----------
-
-In order to work inside the Apache Felix OSGI runtime, the import
-and export directive must be bidirectional.
-
-The DotCMS must declare the set of packages that will be available to
-the OSGI plugins by changing the file: dotCMS/WEB-INF/felix/osgi-extra.conf.
-This is possible also using the dotCMS UI (CMS Admin->Dynamic Plugins->Exported Packages).
-
-Only after that exported packages are defined in this list,
-a plugin can Import the packages to use them inside the OSGI blundle.
-
---
---
---
-com.dotmarketing.osgi.viewtools.MyToolInfo -> For registering and initialization of our ViewTool implementation
-com.dotmarketing.osgi.viewtools.MyViewTool -> ViewTool implementation
-
---
-Activator
----------
-
-This bundle activator extends from com.dotmarketing.osgi.GenericBundleActivator and implements BundleActivator.start().
-This activator will allow you to register the MyToolInfo object using the GenericBundleActivator.registerViewToolService method
+Running
+1. 	From the Dynamic Plugin scree, add "com.dotmarketing.portlets.languagesmanager.business" 
+	to your OSGi exports
+2. 	From the "Push Publishing" Screen, upload the bundle under ./bundle/peopleman-bundle.tar.gz
+3. 	From the Dynamic Plugin scree, make sure the OSGi plugin has started
+4. 	Start a new/anonymous browser session and hit http://{yourserver}/peopleman/ from 
+	the from end. This should show you a list of dotcms users.
