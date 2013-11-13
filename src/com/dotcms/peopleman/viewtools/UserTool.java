@@ -51,7 +51,7 @@ public class UserTool implements ViewTool {
 			Person p = new Person();
 			p.setUser(user);
 			try {
-				List<Contentlet> ucs = APILocator.getContentletAPI().search("+type:content +structurename:person +person.userid:" + user.getUserId(), -1, 0, "moddate", sysUser, true);
+				List<Contentlet> ucs = APILocator.getContentletAPI().search("+type:content +working:true +structurename:person +person.userid:" + user.getUserId(), -1, 0, "moddate", sysUser, true);
 				if(ucs.size()>0){
 					Contentlet uc = ucs.get(0);
 					p.setMale(APILocator.getContentletAPI().getFieldValue(uc, genderField).equals("Male")?true:false);
