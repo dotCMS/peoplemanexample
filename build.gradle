@@ -1,0 +1,42 @@
+apply plugin: 'application'
+apply plugin: 'osgi'
+apply plugin: 'war'
+
+sourceCompatibility = '1.6'
+version = '0.1'
+
+
+repositories {
+	maven {
+        url "http://repo.dotcms.com/artifactory/libs-release"
+    }
+}
+
+dependencies {
+	compile (group: 'com.dotcms', name: 'dotcms', version: '2.5.1'){
+		transitive = true
+	}
+	providedCompile "javax.servlet:servlet-api:2.5"
+}
+
+jar {
+    manifest {
+        name = 'peopleman'
+        instruction 'Bundle-Vendor', 'dotcms'
+        instruction 'Bundle-Description', 'Peopleman Example OSGi Example for dotcms '
+        instruction 'Bundle-DocURL', 'http://www.dotcms.com'
+        instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
+    }
+}
+
+task printDeps(dependsOn: build) << {
+    configurations*.dependencies.each { println it }
+}
+
+task listJars << {
+    configurations.compile.each { File file -> println file.name }
+}
+
+task list(dependsOn: configurations.compile) << {
+    println "classpath = ${configurations.compile.collect {File file -> file.name}}"
+}
