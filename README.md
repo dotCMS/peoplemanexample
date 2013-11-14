@@ -21,6 +21,7 @@ This plugin is intended to be demonstrated on the dotcms starter site.
 3.  From the Dynamic Plugin scree, make sure the OSGi plugin has started
 4.  Start a new/anonymous browser session and hit http://{yourserver}/peopleman/ from the from end. This should show you a list of dotcms users.
 5.  Make sure your exports look like this
+
 com.dotmarketing.business.web,
 com.dotmarketing.business,
 com.dotmarketing.cache,
