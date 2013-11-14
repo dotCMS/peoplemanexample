@@ -28,15 +28,3 @@ jar {
         instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
     }
 }
-
-task printDeps(dependsOn: build) << {
-    configurations*.dependencies.each { println it }
-}
-
-task listJars << {
-    configurations.compile.each { File file -> println file.name }
-}
-
-task list(dependsOn: configurations.compile) << {
-    println "classpath = ${configurations.compile.collect {File file -> file.name}}"
-}
