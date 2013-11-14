@@ -27,6 +27,9 @@ jar {
         instruction 'Bundle-DocURL', 'http://www.dotcms.com'
         instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
     }
+    String contents = new File( 'build/tmp/jar/MANIFEST.MF' ).getText( 'UTF-8' ) 
+	contents = contents.replaceAll( ';version=\".*\"', '' )
+	new File( 'build/tmp/jar/MANIFEST1.MF' ).write( contents, 'UTF-8' )
 }
 
 task wrapper(type: Wrapper) {
