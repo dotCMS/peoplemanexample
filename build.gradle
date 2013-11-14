@@ -28,3 +28,7 @@ jar {
         instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
+}
