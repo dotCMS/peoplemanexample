@@ -27,12 +27,13 @@ jar {
         instruction 'Bundle-DocURL', 'http://www.dotcms.com'
         instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
     }
-    doLast{
-		manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
-        imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
-        imports.value=imports.toString().replaceAll(~/;.+"[\(\[][\d\.]+,[\d\.]+[\)\]]"/,'')
-        manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST1.MF"))
-	}
+}
+
+task removeVersionsOnManifest << {
+	manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
+	imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
+	imports.value=imports.toString().replaceAll(~/;version="[\(\[][0-9\.]+,[0-9\.]+[\)\]]"/,'')
+	manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST1.MF"))
 }
 
 task renameOrignalManifest (type: Copy) {
@@ -47,7 +48,7 @@ task renameNewManifest (type: Copy) {
 	rename ('MANIFEST1.MF', 'MANIFEST.MF')
 }
 
-task osgijar(type: Jar, dependsOn: ['jar', 'renameOrignalManifest', 'renameNewManifest'] ) { 
+task osgijar(type: Jar, dependsOn: ['jar', 'removeVersionsOnManifest' ,'renameOrignalManifest', 'renameNewManifest'] ) { 
     appendix = "generatedjar" 
     from zipTree(jar.archivePath) // add original content 
     manifest {
