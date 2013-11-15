@@ -28,12 +28,28 @@ jar {
         instruction 'Bundle-Activator', 'com.dotcms.peopleman.viewtools.Activator'
     }
     doLast{
-		String contents = new File( 'build/tmp/jar/MANIFEST.MF' ).getText( 'UTF-8' ) 
-		contents = contents.replaceAll( ';(|.+\\s)(.+?(\\)"|\\)))| "', '' )
-		new File( 'build/tmp/jar/MANIFEST1.MF' ).write( contents, 'UTF-8' )
+		manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
+        imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
+        imports.value=imports.toString().replaceAll(~/;.+"[\(\[][\d\.]+,[\d\.]+[\)\]]"/,'')
+        manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST1.MF"))
 	}
 }
 
+task osgijar(type: Jar, dependsOn: ['jar', 'renameOrignalManifest', 'renameNewManifest'] ) { 
+    appendix = "generatedjar" 
+    from zipTree(jar.archivePath) // add original content 
+    from(file("build/tmp/jar/MANIFEST.MF")) {   // add new content 
+        into "META-INF" 
+    } 
+} 
+
+task renameOrignalManifest (type: Copy) {
+	rename ('build/tmp/jar/MANIFEST.MF', 'build/tmp/jar/MANIFEST_ORIGINAL.MF')
+}
+
+task renameNewManifest (type: Copy) {
+	rename ('build/tmp/jar/MANIFEST1.MF', 'build/tmp/jar/MANIFEST.MF')
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
