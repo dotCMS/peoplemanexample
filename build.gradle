@@ -30,8 +30,8 @@ jar {
 }
 
 task removeVersionsOnManifest << {
-	manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
-	imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
+	def manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
+	def imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
 	imports.value=imports.toString().replaceAll(~/;version="[\(\[][0-9\.]+,[0-9\.]+[\)\]]"/,'')
 	manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST1.MF"))
 }
