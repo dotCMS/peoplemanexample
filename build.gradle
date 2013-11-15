@@ -48,7 +48,11 @@ task renameNewManifest (type: Copy) {
 	rename ('MANIFEST1.MF', 'MANIFEST.MF')
 }
 
-task osgijar(type: Jar, dependsOn: ['jar', 'removeVersionsOnManifest' ,'renameOrignalManifest', 'renameNewManifest'] ) { 
+task cleanUp (type: Delete){
+	delete 'build/tmp/jar/MANIFEST1.MF'
+}
+
+task osgijar(type: Jar, dependsOn: ['jar', 'removeVersionsOnManifest' ,'renameOrignalManifest', 'renameNewManifest', 'cleanUp'] ) { 
     appendix = "generatedjar" 
     from zipTree(jar.archivePath) // add original content 
     manifest {
