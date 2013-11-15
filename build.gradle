@@ -35,14 +35,6 @@ jar {
 	}
 }
 
-task osgijar(type: Jar, dependsOn: ['jar', 'renameOrignalManifest', 'renameNewManifest'] ) { 
-    appendix = "generatedjar" 
-    from zipTree(jar.archivePath) // add original content 
-    from(file("build/tmp/jar/MANIFEST.MF")) {   // add new content 
-        into "META-INF" 
-    } 
-} 
-
 task renameOrignalManifest (type: Copy) {
 	from('build/tmp/jar/')
     into('build/tmp/jar/')
@@ -54,6 +46,14 @@ task renameNewManifest (type: Copy) {
     into('build/tmp/jar/')
 	rename ('MANIFEST1.MF', 'MANIFEST.MF')
 }
+
+task osgijar(type: Jar, dependsOn: ['jar', 'renameOrignalManifest', 'renameNewManifest'] ) { 
+    appendix = "generatedjar" 
+    from zipTree(jar.archivePath) // add original content 
+    manifest {
+    	from('build/tmp/jar/MANIFEST.MF')
+    } 
+} 
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
