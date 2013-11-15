@@ -33,32 +33,15 @@ task removeVersionsOnManifest (dependsOn: ['jar']) << {
 	def manifest1=new java.util.jar.Manifest(new FileInputStream('build/tmp/jar/MANIFEST.MF'))
 	def imports = manifest1.getMainAttributes().find { it.key.toString()=="Import-Package" }
 	imports.value=imports.toString().replaceAll(~/;version="[\(\[][0-9\.]+,[0-9\.]+[\)\]]"/,'')
-	manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST1.MF"))
+	manifest1.write(new FileOutputStream("build/tmp/jar/MANIFEST_NOVERSIONS.MF"))
 }
 
 
-task renameOrignalManifest (type: Copy, dependsOn: ['removeVersionsOnManifest']) {
-	from('build/tmp/jar/')
-    into('build/tmp/jar/')
-	rename ('MANIFEST.MF', 'MANIFEST_ORIGINAL.MF')
-}
-
-task renameNewManifest (type: Copy, dependsOn: ['renameOrignalManifest']) {
-	from('build/tmp/jar/')
-    into('build/tmp/jar/')
-	rename ('MANIFEST1.MF', 'MANIFEST.MF')
-}
-
-task cleanUp (type: Delete, dependsOn: ['jar', 'renameNewManifest']){
-	delete 'build/tmp/jar/MANIFEST1.MF'
-}
-
-
-task osgijar(type: Jar, dependsOn: ['cleanUp'] ) { 
+task osgijar(type: Jar, dependsOn: ['removeVersionsOnManifest'] ) { 
     appendix = "generatedjar" 
     from zipTree(jar.archivePath) // add original content 
     manifest {
-    	from('build/tmp/jar/MANIFEST.MF')
+    	from('build/tmp/jar/MANIFEST_NOVERSIONS.MF')
     } 
 } 
 
