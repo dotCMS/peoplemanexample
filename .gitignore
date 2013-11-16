@@ -1,5 +1,9 @@
 build/
 .gradle/
+bin/
+.classpath
+.project
+.settings/
 
 # OS generated files #
 ######################

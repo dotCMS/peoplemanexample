@@ -1,6 +1,7 @@
 apply plugin: 'application'
 apply plugin: 'osgi'
 apply plugin: 'war'
+apply plugin: 'eclipse'
 
 sourceCompatibility = '1.6'
 version = '0.1'
@@ -47,4 +48,16 @@ task osgijar(type: Jar, dependsOn: ['removeVersionsOnManifest'] ) {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
+}
+
+eclipse.classpath.file {
+  whenMerged { classpath ->
+    def containers = classpath.entries.findAll {
+      entry -> entry.kind == 'con' &&
+      entry.path == 'org.eclipse.jdt.launching.JRE_CONTAINER' &&
+      entry.exported == 'true'}
+      classpath.entries.removeAll (containers)
+    classpath.entries.findAll { entry -> entry.kind == 'con' &&
+            entry.path == 'org.eclipse.jdt.launching.JRE_CONTAINER'}*.exported = false
+  }
 }
